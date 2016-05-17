@@ -9,7 +9,9 @@ var endpointLogic = function(req, res) {
 }
 
 module.exports.handler = function(event, context, cb) {
+  console.log(JSON.stringify(event,null,'\t'));
   var req = event;
+  req.ip = req.headers["X-Forwarded-For"]
   var res = {
     json: function(payload){ cb(null, payload); }
   };
