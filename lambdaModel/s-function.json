@@ -21,7 +21,10 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": ""
+        "application/json": {
+          "echo": "$input.params('echo')",
+          "sourceIp": "$context.identity.sourceIp"
+        }
       },
       "responses": {
         "400": {

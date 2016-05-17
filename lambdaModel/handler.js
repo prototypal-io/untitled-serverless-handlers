@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports.handler = function(event, context, cb) {
+  var echo = event.echo || "Say something.";
   return cb(null, {
-    message: 'Go Serverless! Your Lambda function executed successfully!'
+    echo: echo,
+    sourceIp: event.sourceIp
   });
 };
