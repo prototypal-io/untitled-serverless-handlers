@@ -211,3 +211,31 @@ with a `json` method. When that method is called we can just call the
 After massaging the `req` and implementing the `res` we can call the
 `endpointLogic` function, passing along our new values.
 
+## Pros/cons of each model
+
+### Lambda model
+
+Pros:
+  * Easier to program the Lambda deployment target
+  * Handlers are simple functions with inputs and
+    outputs, and don't know about HTTP, making them
+    easily testable without the need to mock HTTP requests
+    and responses
+
+Cons:
+  * Exposes details about API Gateway and Lambda
+  * Possibly unfamiliar programming model to develoeprs who are used to
+    thinking about requests and responses
+  * Routing layer has additional responsibility
+
+### Express model
+
+Pros:
+  * More familiar programming model for developers who are used to
+    reqeuests and responses
+  * Masks details about API Gateway and Lambda
+  * Routing layer is simpler
+
+Cons:
+  * Hanlders are more complex because they deal with HTTP concerns
+  * More complicated requirements for Lambda deployment target
