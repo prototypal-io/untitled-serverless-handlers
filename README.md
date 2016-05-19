@@ -190,7 +190,8 @@ as a `request` and `response`.
 
 The event object passed in from API Gateway is reasonably close to what
 we'd expect a `request` object to be in Express.js, so we only need to
-do a little manipulation of it to masqurade it as a request.
+do a little manipulation of it to masqurade it as a request (for this
+demo).
 
 ```javascript
   var req = event;
