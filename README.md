@@ -43,7 +43,7 @@ There are two general paths we can take for our own handler API:
 5. `sls dash deploy` select all functions, events, and endpoints, then
     deploy them.
 
-Once the deployment has completed you should see two URLs:
+Once the deployment has completed you should see two URLs similar to:
 
 ```
 Serverless:   GET - expressModel - https://tsb2awokji.execute-api.us-east-1.amazonaws.com/dev/expressModel  
@@ -52,8 +52,7 @@ Serverless:   GET - lambdaModel - https://tsb2awokji.execute-api.us-east-1.amazo
 
 ## The Lambda Model
 
-`lambdaModel` demonstrates the "traditional" way to program lambda
-functions.
+The `lambdaModel` directory demonstrates the "traditional" Serverless way to program lambda functions.
 
 You can hit this URL to see it in action:
 
@@ -192,6 +191,11 @@ as a `request` and `response`.
 The event object passed in from API Gateway is reasonably close to what
 we'd expect a `request` object to be in Express.js, so we only need to
 do a little manipulation of it to masqurade it as a request.
+
+```javascript
+  var req = event;
+  req.ip = req.headers["X-Forwarded-For"]
+```
 
 To match the Express.js way of returning json we need a `res` object
 with a `json` method. When that method is called we can just call the
