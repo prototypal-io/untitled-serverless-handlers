@@ -7,7 +7,8 @@ var endpointLogic = function(req, res) {
   res.json({
     echo: echo,
     sourceIp: req.ip,
-    accepts: req.accepts(['json', 'text'])
+    accepts: req.accepts(['json', 'text']),
+    host: req.get('Host')
   });
 }
 
@@ -36,12 +37,36 @@ var buildRequest = function(event, context, cb) {
   req.stale = false; // TODO : Does this apply in our context?
   req.subdomains = []; // TODO: Does this apply?
   req.xhr = event.headers["X-Requested-With"] === 'XMLHttpRequest';
-
+  
+  var accept = realAccepts(req);
+  
 
   // Methods
-  req.accepts = function accepts(){
-    return realAccepts(arguments).negotiator.request["0"];
+  req.accepts = function accepts(types){
+    // TODO : Fix me!
+    return types;
+    //return accept.type(types);
   };
+
+  req.acceptsCharsets = function acceptsCharsets(){
+    // TODO : Fix me!
+  };
+
+  req.acceptsEncodings = function acceptsEncodings(){
+    // TODO : Fix me!
+  };
+
+  req.acceptsLanguages = function acceptsLanguages(){
+    // TODO : Fix me!
+  };
+
+  req.get = function get(field){
+    return event.headers[field];
+  }
+
+  req.is = function is(type){
+    // TODO: Fix me!
+  }
 
   return req;
 }
