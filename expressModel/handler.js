@@ -4,6 +4,7 @@ const realAccepts = require('accepts');
 
 var endpointLogic = function(req, res) {
   var echo = req.query.echo || "Say something.";
+  res.append('Test','header test');
   res.json({
     echo: echo,
     sourceIp: req.ip,
@@ -72,9 +73,100 @@ var buildRequest = function(event, context, cb) {
 }
 
 var buildResponse = function(event, context, cb) {
-  var res = {
-    json: function(payload){ cb(null, payload); }
-  };
+  var res = {};
+
+  // Properties
+  res.app = null; // TODO : Does this apply?
+  res.headersSent = false; // TODO : Is this right?
+  res.locals = {}; // TODO: Does this apply?
+
+  res.headers = [];
+
+  // Methods
+  res.append = function append(field,value){
+    res.headers.push([field,value]);
+  }
+
+  res.attachment = function attachment(){
+    // TODO: Can we return attachments through API Gatewway?
+  }
+
+  res.cookie = function cookie(name, value, options){
+    // TODO: Can we set cookies?
+  }
+
+  res.clearCookie = function clearCookie(name, options){
+    // TODO: Can we set cookies?
+  }
+
+  res.download = function download(){
+    // TODO: Can we do this?
+  }
+
+  res.end = function end(){
+    // TODO: Implement me!
+  }
+
+  res.format = function format(){
+    // TODO: does this apply?
+  }
+
+  res.get = function get(){
+    // TODO: Implement me!
+  }
+
+  res.json = function json(payload){
+    cb(null, payload);
+  }
+
+  res.jsonp = function jsonp(){
+    // TODO: does this apply?
+  }
+
+  res.links = function links(){
+    // TODO: Implement me!
+  }
+
+  res.location = function location(){
+    // TODO: Implement me!
+  }
+
+  res.redirect = function redirect(){
+    // TODO: Implement me!
+  }
+
+  res.render = function render(){
+    // TODO: Does this apply?
+  }
+
+  res.send = function send(){
+    // TODO: Does this apply?
+  }
+
+  res.sendFile = function sendFile(){
+    // TODO: Does this apply?
+  }
+
+  res.sendStatus = function sendStatus(){
+    // TODO: Implement me!
+  }
+
+  res.set = function set(){
+    // TODO: Implement me!
+  }
+
+  res.status = function status(){
+    // TODO: Implement me!
+  }
+
+  res.type = function type(){
+    // TODO: Implement me!
+  }
+
+  res.vary = function vary(){
+    // TODO: Implement me!
+  }
+
   return res;
 }
 
