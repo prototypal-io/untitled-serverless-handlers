@@ -1,10 +1,13 @@
 'use strict';
 
+const realAccepts = require('accepts');
+
 var endpointLogic = function(req, res) {
   var echo = req.query.echo || "Say something.";
   res.json({
     echo: echo,
-    sourceIp: req.ip
+    sourceIp: req.ip,
+    accepts: req.accepts(['json', 'text'])
   });
 }
 
@@ -36,7 +39,9 @@ var buildRequest = function(event, context, cb) {
 
 
   // Methods
-
+  req.accepts = function accepts(){
+    return realAccepts(arguments).negotiator.request["0"];
+  };
 
   return req;
 }
