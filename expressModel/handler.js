@@ -38,11 +38,9 @@ var buildRequest = function(event, context, cb) {
   req.stale = false; // TODO : Does this apply in our context?
   req.subdomains = []; // TODO: Does this apply?
   req.xhr = event.headers["X-Requested-With"] === 'XMLHttpRequest';
-  
-  var accept = realAccepts(req);
-  
 
   // Methods
+  var accept = realAccepts(req);
   req.accepts = function accepts(types){
     // TODO : Fix me!
     return types;
@@ -111,8 +109,8 @@ var buildResponse = function(event, context, cb) {
     // TODO: does this apply?
   }
 
-  res.get = function get(){
-    // TODO: Implement me!
+  res.get = function get(field){
+    return headers[field];
   }
 
   res.json = function json(payload){
@@ -120,7 +118,7 @@ var buildResponse = function(event, context, cb) {
   }
 
   res.jsonp = function jsonp(){
-    // TODO: does this apply?
+    // TODO: Do we need to support josnp?
   }
 
   res.links = function links(){

@@ -20,7 +20,7 @@
       "authorizerFunction": false,
       "apiKeyRequired": false,
       "requestParameters": {},
-      "requestTemplates": "$${expressRequestTemplate}",
+      "requestTemplates": "$${passthroughTemplate}",
       "responses": {
         "400": {
           "statusCode": "400"
